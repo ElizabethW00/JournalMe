@@ -25,13 +25,17 @@ const Scribble = ({
         bold && "redacted-script-bold"
       } pointer-events-none select-none tracking-wide uppercase text-justify`}
     >
-      <p
-        className={`absolute ${innerClassName} ${
-          animate && "animate-scribble"
-        }`}
-      >
+      <div className={`absolute ${innerClassName}`}>
         {text ?? "musicaewjo"}
-      </p>
+
+        <div
+          className={`${
+            animate
+              ? "animate-scribble w-[105%] h-full absolute top-1/2 right-[-1px] bg-white"
+              : "hidden"
+          }`}
+        />
+      </div>
     </div>
   );
 };

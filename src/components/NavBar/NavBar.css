@@ -20,29 +20,18 @@
   cursor: pointer;
   padding-bottom: 5px;
   width: fit-content;
-  /* overflow-x: hidden; */
-  /* overflow-y: visible; */
-}
-
-.underline {
-  position: absolute;
-  left: 0;
-  bottom: -5px; /* Position it under text */
-  width: 100%;
-}
-
-.underline path {
-  stroke-dasharray: 120;
-  stroke-dashoffset: 120;
-  transition: stroke-dashoffset 0.5s ease-in-out;
-}
-
-.hyperlink:hover .underline path {
-  stroke-dashoffset: 0; /* Reveals the path from left to right */
 }
 
 
-
+/*** SCRIBBLE STYLINGS ***/
+.hyperlink .animate-scribble {
+  width: 105%;
+  transition: width 0.3s ease-in-out;
+}
+.hyperlink:hover .animate-scribble {
+  width: 0%;
+  transition: width 0.3s ease-in-out;
+}
 
 .signInButton {
   display: flex;
