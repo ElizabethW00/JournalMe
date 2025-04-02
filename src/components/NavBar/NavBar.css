@@ -1,0 +1,54 @@
+.topNav {
+  padding: 32px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 80px;
+  min-width: fit-content;
+}
+
+.hyperlink {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  padding-bottom: 5px;
+}
+
+.underline {
+  position: absolute;
+  left: 0;
+  bottom: -5px; /* Position it under text */
+  width: 100%;
+  overflow: hidden;
+}
+
+.underline path {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  transition: stroke-dashoffset 0.5s ease-in-out;
+}
+
+.hyperlink:hover .underline path {
+  stroke-dashoffset: 0; /* Reveals the path from left to right */
+}
+
+
+
+
+.signInButton {
+  display: flex;
+  background-color: #f3fff9;
+  align-items: center;
+  justify-content: center;
+  height: 49px;
+  width: 113px;
+  border-radius: 30;
+  box-shadow: 5px 2px 20px 1px rgb(198, 198, 198);
+}
