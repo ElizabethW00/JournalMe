@@ -12,7 +12,8 @@ const Home = () => {
         </h1>
         <Scribble
           regular
-          className="text-5xl absolute pt-5 lg:text-7xl lg:pt-6"
+          className="text-5xl absolute pt-5 lg:text-7xl lg:pt-6 w-full"
+          innerClassName="left-1/2 -translate-x-1/2 top-0"
         />
 
         <p>A platform to express your thoughts in a secured way</p>

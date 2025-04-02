@@ -15,10 +15,13 @@
 }
 
 .hyperlink {
-  position: relative;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   cursor: pointer;
   padding-bottom: 5px;
+  width: fit-content;
+  /* overflow-x: hidden; */
+  /* overflow-y: visible; */
 }
 
 .underline {
@@ -26,7 +29,6 @@
   left: 0;
   bottom: -5px; /* Position it under text */
   width: 100%;
-  overflow: hidden;
 }
 
 .underline path {
