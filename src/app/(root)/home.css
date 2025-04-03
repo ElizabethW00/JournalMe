@@ -1,7 +1,13 @@
 .begin-button {
   width: 217px;
-  height: 58px;
-  font-size: 20;
+   height: 58px;
+   display: flex;
+   background-color: #f3fff9;
+   justify-content: center;
+   align-items: center;
+   border-radius: 30;
+   font-size: 20;
+   box-shadow: 5px 2px 20px 1px rgb(198, 198, 198);
 }
 
 .title {

@@ -10,7 +10,7 @@ const NavElement = ({ name, path }: { name: string; path: string }) => {
       <p>{name}</p>
       <Scribble
         regular
-        className="text-[20px] w-full h-full"
+        className="text-[16px] w-full h-full"
         innerClassName="top-14"
         text={name}
         animate

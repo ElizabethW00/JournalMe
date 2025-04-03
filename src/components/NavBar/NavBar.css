@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 20;
+  font-size:16;
 }
 
 .links {
@@ -33,6 +33,12 @@
 }
 
 .signInButton {
-  height: 49px;
-  width: 113px;
+  height: 44px;
+  width: 107px;
+  background-color: #F3FFF9;
+  border-radius: 30;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 5px 2px 20px 1px rgb(198, 198, 198);
 }
