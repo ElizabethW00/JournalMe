@@ -1,7 +1,13 @@
-import React from "react";
+"use client";
 
-const Calender = () => {
-  return <div>Calender</div>;
-};
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import "./calendar.css";
 
-export default Calender;
+export default function Calendar() {
+  return (
+    <div className="cal">
+      <FullCalendar plugins={[dayGridPlugin]} initialView="dayGridMonth" />
+    </div>
+  );
+}
