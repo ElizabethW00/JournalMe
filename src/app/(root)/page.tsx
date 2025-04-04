@@ -10,6 +10,11 @@ const Home = async () => {
 
   return (
     <section className="flex flex-col w-screen h-[calc(100vh-113px)] items-center justify-center text-center gap-[5rem] home">
+      <div className="backThree">
+        <div className="blurBox bg-teal-50"></div>
+        <div className="blurBox bg-pink-50"></div>
+        <div className="blurBox bg-cyan-50"></div>
+      </div>
       {/* center text */}
       <div className="flex flex-col justify-center items-center gap-10 title">
         <h1 className="font-semibold text-7xl lg:text-[100px] bad-script">

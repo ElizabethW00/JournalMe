@@ -1,9 +1,10 @@
 .topNav {
-  padding: 32px 64px;
+  padding: 32px 64px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 16;
+  background-color: white;
 }
 
 .links {
