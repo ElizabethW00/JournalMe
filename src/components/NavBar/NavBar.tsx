@@ -37,9 +37,7 @@ const NavBar = async () => {
             <NavElement name={"Calender"} path={"/calender"} />
           </>
         )}
-
         <NavElement name={"About"} path={"/about"} />
-
         {/* if there is a user, show their profile, else show sign-in button */}
         {user ? (
           <UserButton />
