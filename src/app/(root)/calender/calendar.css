@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap");
+
+.cal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+  width: 100%;
+  font-family: "Playpen Sans", cursive;
+}
+
+.cal .fc {
+  width: 80vw;
+  max-width: 1200px;
+  height: auto;
+}

@@ -33,6 +33,7 @@ const NavBar = async () => {
         {/* only if there is a user, show the links to journal + calender */}
         {user && (
           <>
+            <NavElement name={"Write"} path={"/write"} />
             <NavElement name={"Journals"} path={"/journals"} />
             <NavElement name={"Calender"} path={"/calender"} />
           </>
