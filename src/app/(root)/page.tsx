@@ -38,7 +38,7 @@ const Home = async () => {
       {/* if there is user, start writing, else begin */}
       <Link
         href={user ? "/journals" : "/sign-up"}
-        className="flex gap-2 shadow-button light-blue begin-button animate-bigger"
+        className="flex gap-2 shadow-button light-blue begin-button animate-bigger text-xl hover:gap-4 transition-all duration-300"
       >
         {user ? "Let's write" : "Begin"}
         <ArrowRight />
