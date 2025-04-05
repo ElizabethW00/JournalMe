@@ -6,8 +6,19 @@ import "./calendar.css";
 
 export default function Calendar() {
   return (
-    <div className="cal">
-      <FullCalendar plugins={[dayGridPlugin]} initialView="dayGridMonth" />
-    </div>
+    <section className="cal py-12">
+      {/* pass in custom journal id link into url */}
+      {/* journal data structure:
+        - id
+        - title
+        - date
+        - content
+      */}
+      <FullCalendar
+        plugins={[dayGridPlugin]}
+        initialView="dayGridMonth"
+        events={[{ title: "event 1", date: "2025-04-01", url: "/" }]}
+      />
+    </section>
   );
 }
