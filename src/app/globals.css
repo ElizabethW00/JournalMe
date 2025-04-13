@@ -36,6 +36,27 @@
   box-shadow: 5px 2px 20px 1px rgb(198, 198, 198);
 }
 
+/* HANDLES SCRIBBLE ANIMATION WHEN HOVERING OVER HYPERLINKS */
+.hyperlink {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  padding-bottom: 5px;
+}
+
+.hyperlink:hover {
+  font-weight: 700;
+}
+
+.animate-scribble {
+  width: 105%;
+  transition: width 0.3s ease-in-out;
+}
+.hyperlink:hover .animate-scribble {
+  width: 0%;
+  transition: width 0.3s ease-in-out;
+}
+
 @layer base {
   .light-blue {
     @apply bg-[#f3fff9];
