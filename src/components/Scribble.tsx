@@ -31,7 +31,7 @@ const Scribble = ({
         <div
           className={`${
             animate
-              ? "animate-scribble w-[105%] h-full absolute top-1/2 right-[-1px] bg-white"
+              ? `animate-scribble w-[105%] h-full absolute top-1/2 right-[-1px] bg-white`
               : "hidden"
           }`}
         />
