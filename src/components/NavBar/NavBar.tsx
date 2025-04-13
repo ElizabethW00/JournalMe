@@ -19,7 +19,7 @@ const NavBar = async () => {
           <>
             <NavTab name="Write" path="/write" className="w-[41px]" />
             <NavTab name="Journals" path="/journals" className="w-[66px]" />
-            <NavTab name="Calender" path="/calender" className="w-[69px]" />
+            <NavTab name="Calendar" path="/calendar" className="w-[69px]" />
           </>
         )}
         <NavTab name="About" path="/about" className="w-[46px]" />
