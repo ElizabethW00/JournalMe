@@ -6,6 +6,14 @@ const Write = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [value, setValue] = useState<string>("");
 
+  const autoGrow = () => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.style.height = "auto";
+      textarea.style.height = textarea.scrollHeight + "px";
+    }
+  };
+
   // Handle input change and format the lines
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     let inputValue = e.target.value;
@@ -38,6 +46,8 @@ const Write = () => {
       textarea.style.height = "auto"; // Reset height
       textarea.style.height = textarea.scrollHeight + "px"; // Grow to fit content
     }
+
+    autoGrow();
   };
 
   // Handle Tab key for indentation and Enter key for continuing list
@@ -88,10 +98,12 @@ const Write = () => {
           `${nextNumber}.    ` +
           value.substring(end);
         textarea.selectionStart = textarea.selectionEnd =
-          start + `${nextNumber}.    `.length; 
+          start + `${nextNumber}.    `.length;
         e.preventDefault();
       }
     }
+
+    autoGrow();
   };
 
   // Format today's date for display
@@ -103,18 +115,24 @@ const Write = () => {
   });
 
   return (
-    <div className="platform">
-      <p className="date">{today}</p>
-      <form>
-        <textarea
-          ref={textareaRef}
-          value={value}
-          onInput={handleInput}
-          onKeyDown={handleKeyDown}
-          placeholder="Write your thoughts..."
-          className="writing-area"
-        />
-      </form>
+    <div className="page">
+      <div className="backTwo">
+        <div className="blurBox bg-teal-50"></div>
+        <div className="blurBox bg-cyan-50"></div>
+      </div>
+      <div className="platform">
+        <p className="date">{today}</p>
+        <form>
+          <textarea
+            ref={textareaRef}
+            value={value}
+            onInput={handleInput}
+            onKeyDown={handleKeyDown}
+            placeholder="Write your thoughts..."
+            className="writing-area"
+          />
+        </form>
+      </div>
     </div>
   );
 };

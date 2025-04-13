@@ -1,15 +1,46 @@
-/* CSS */
-/* Main container for the page */
+/* Ensure page uses full width, prevents horizontal scroll */
+.page {
+  width: 100vw;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  max-height: 88vh;
+}
+
+/* Main container that grows with content */
 .platform {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
   width: 70%;
-  height: 100vh;
   margin: 0 auto;
   padding-top: 20px;
+  padding-bottom: 50px; /* add padding so text doesn’t get cut off at bottom */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
   font-family: "Georgia", serif;
+  min-height: calc(100vh - 100px);
+}
+
+/* Fixed blurred background that stays in place */
+.backTwo {
+  position: fixed; /* makes it stay stationary */
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Keep blur boxes from overflowing */
+.blurBox {
+  width: 300px;
+  height: 600px;
+  border-radius: 100%;
+  filter: blur(40px);
+  flex-shrink: 0;
 }
 
 .date {
@@ -21,26 +52,16 @@
   margin-left: 60px;
 }
 
-/* Form styling */
+/* Form fits inside container */
 form {
   width: 80%;
   padding: 20px;
   border-radius: 5px;
 }
 
-/* Input field styling */
-input {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-}
-
-/* Add this to your existing CSS */
-
+/* Make textarea grow with content */
 .writing-area {
   width: 100%;
-  min-height: 80vh;
   font-size: 16px;
   padding: 10px;
   border: none;
@@ -52,4 +73,5 @@ input {
   box-sizing: border-box;
   caret-color: black;
   background: transparent;
+  line-height: 1.5;
 }
