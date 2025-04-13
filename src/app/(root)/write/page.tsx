@@ -45,6 +45,8 @@ const Write = () => {
     if (textarea) {
       textarea.style.height = "auto"; // Reset height
       textarea.style.height = textarea.scrollHeight + "px"; // Grow to fit content
+
+      textarea.scrollIntoView({ behavior: "smooth", block: "end" });
     }
 
     autoGrow();
@@ -104,6 +106,7 @@ const Write = () => {
     }
 
     autoGrow();
+    textarea.scrollIntoView({ behavior: "auto", block: "end" });
   };
 
   // Format today's date for display
