@@ -1,7 +1,4 @@
 /* CSS */
-body {
-  font-family: "Georgia", serif;
-}
 /* Main container for the page */
 .platform {
   display: flex;
@@ -12,6 +9,7 @@ body {
   height: 100vh;
   margin: 0 auto;
   padding-top: 20px;
+  font-family: "Georgia", serif;
 }
 
 .date {
