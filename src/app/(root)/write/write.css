@@ -1,0 +1,57 @@
+/* CSS */
+body {
+  font-family: "Georgia", serif;
+}
+/* Main container for the page */
+.platform {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 70%;
+  height: 100vh;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+.date {
+  font-size: 16px;
+  font-weight: 600;
+  color: #444;
+  text-align: left;
+  width: 80%;
+  margin-left: 60px;
+}
+
+/* Form styling */
+form {
+  width: 80%;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+/* Input field styling */
+input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+/* Add this to your existing CSS */
+
+.writing-area {
+  width: 100%;
+  min-height: 80vh;
+  font-size: 16px;
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 0;
+  resize: none;
+  overflow: hidden;
+  font-family: inherit;
+  box-sizing: border-box;
+  caret-color: black;
+  background: transparent;
+}
