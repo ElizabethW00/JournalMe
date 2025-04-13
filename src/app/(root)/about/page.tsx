@@ -6,7 +6,9 @@ const About = () => {
       <div className="flex flex-col lg:flex-row items-center gap-20">
         <div className="w-full lg:w-1/2">
           <section className="mb-8">
-            <h2 className="text-3xl font-bold mb-4">About JournalMe</h2>
+            <h2 className="text-5xl font-bold mb-4 bad-script">
+              About JournalMe
+            </h2>
             <p className="text-lg leading-relaxed">
               JournalMe is a platform designed for focused, distraction-free
               journaling. Whether you're reflecting on your day or tracking your
