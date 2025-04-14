@@ -35,14 +35,14 @@ const About = () => {
         {/* Image */}
         <div className="w-full lg:w-1/2 flex justify-center">
           <img
-            src="journal.png"
+            src="home.png"
             alt="JournalMe Preview"
             className="rounded-lg shadow-lg max-w-full h-auto"
           />
         </div>
       </div>
       <section className="py-10">
-        <h2 className="text-3xl font-bold mb-4">Let’s Begin!</h2>
+        <h2 className="text-3xl font-bold mb-4 text-center">Let’s Begin!</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-10 text-center">
           {/* Step 1 */}
           <div>
@@ -87,7 +87,7 @@ const About = () => {
               progress!
             </p>
             <img
-              src="calendarView.png"
+              src="calendar.png"
               alt="Calendar View"
               className="rounded-lg shadow-lg mx-auto"
             />

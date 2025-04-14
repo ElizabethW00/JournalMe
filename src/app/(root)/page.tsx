@@ -30,7 +30,7 @@ const Home = async () => {
         <p className="description">
           {user
             ? "Hello, " + user.fullName
-            : "A platform to express your thoughts in a secured way"}
+            : "A platform to express your thoughts in a distraction-free environment"}
         </p>
       </div>
 
