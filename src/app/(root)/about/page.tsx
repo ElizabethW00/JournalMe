@@ -3,20 +3,18 @@ import React from "react";
 const About = () => {
   return (
     <div className="px-6 py-8 max-w-6xl mx-auto">
+      <section className="mb-8">
+        <h2 className="text-4xl font-bold mb-4 bad-script">About JournalMe</h2>
+        <p className="text-lg leading-relaxed">
+          JournalMe is a platform designed for focused, distraction-free
+          journaling. Whether you're reflecting on your day or tracking your
+          personal growth, JournalMe helps you concentrate on your thoughts and
+          revisit past entries effortlessly. If you enjoy writing and seeing
+          your journey unfold, JournalMe is made for you.
+        </p>
+      </section>
       <div className="flex flex-col lg:flex-row items-center gap-20">
         <div className="w-full lg:w-1/2">
-          <section className="mb-8">
-            <h2 className="text-5xl font-bold mb-4 bad-script">
-              About JournalMe
-            </h2>
-            <p className="text-lg leading-relaxed">
-              JournalMe is a platform designed for focused, distraction-free
-              journaling. Whether you're reflecting on your day or tracking your
-              personal growth, JournalMe helps you concentrate on your thoughts
-              and revisit past entries effortlessly. If you enjoy writing and
-              seeing your journey unfold, JournalMe is made for you.
-            </p>
-          </section>
           <section>
             <h2 className="text-3xl font-bold mb-4">Create an Account</h2>
             <div className="space-y-2 text-lg">
