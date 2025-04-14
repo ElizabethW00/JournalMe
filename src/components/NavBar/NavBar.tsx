@@ -1,4 +1,4 @@
-import { Hamburger, NavTab } from "./NavElements";
+import { DesktopNav, Hamburger, NavTab } from "./NavElements";
 import { currentUser } from "@clerk/nextjs/server";
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
@@ -15,14 +15,10 @@ const NavBar = async () => {
 
       {/* DESKTOP LINK TABS */}
       <div className="links hidden sm:flex">
-        {user && (
-          <>
-            <NavTab name="Write" path="/write" className="w-[41px]" />
-            <NavTab name="Journals" path="/journals" className="w-[66px]" />
-            <NavTab name="Calendar" path="/calendar" className="w-[69px]" />
-          </>
-        )}
+        {user && <DesktopNav />}
+
         <NavTab name="About" path="/about" className="w-[46px]" />
+
         {user ? (
           <UserButton />
         ) : (
