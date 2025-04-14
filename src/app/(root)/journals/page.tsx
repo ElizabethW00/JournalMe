@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { IoAddOutline } from "react-icons/io5";
 import Entry from "@/components/Entry/page";
+import Link from "next/link";
 
 const Journals = () => {
   const [entries, setEntries] = useState([
@@ -29,9 +30,9 @@ const Journals = () => {
     <div className="px-6 py-8 max-w-6xl mx-auto">
       <div className="flex flex-row justify-between">
         <h1 className="bad-script text-4xl">My Journals</h1>
-        <a href="/write">
+        <Link href="/write">
           <IoAddOutline size={42} color="black" />
-        </a>
+        </Link>
       </div>
       <div className="mt-6">
         {entries.map((entry) => (
