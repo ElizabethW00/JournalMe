@@ -4,7 +4,6 @@ import {
   IoCreateOutline,
   IoTrashOutline,
 } from "react-icons/io5";
-import { FaFont } from "react-icons/fa6";
 
 type EntryProps = {
   id: number;
@@ -44,13 +43,11 @@ const Entry = ({
   return (
     <div
       onClick={handleEntryClick}
-      className={`
-        flex justify-between items-center border border-gray-100
+      className={`flex justify-between items-center border border-gray-100
         p-4 rounded-lg mb-4 cursor-pointer 
         transition-all duration-300 
         ${locked ? "bg-gray-200" : "bg-white"} 
-        hover:shadow-md hover:translate-y-1
-      `}
+        hover:shadow-md hover:translate-y-1`}
     >
       <p className="font-semibold text-lg">{name ?? `Journal ${num}`}</p>
       <p className="text-md">{date}</p>
