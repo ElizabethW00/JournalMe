@@ -46,7 +46,7 @@ const Write = () => {
       textarea.style.height = "auto"; // Reset height
       textarea.style.height = textarea.scrollHeight + "px"; // Grow to fit content
 
-      textarea.scrollIntoView({ behavior: "smooth", block: "end" });
+      textarea.scrollIntoView({ behavior: "auto", block: "nearest" });
     }
 
     autoGrow();
@@ -106,7 +106,7 @@ const Write = () => {
     }
 
     autoGrow();
-    textarea.scrollIntoView({ behavior: "auto", block: "end" });
+    textarea.scrollIntoView({ behavior: "auto", block: "nearest" });
   };
 
   // Format today's date for display
@@ -126,14 +126,17 @@ const Write = () => {
       <div className="platform">
         <p className="date">{today}</p>
         <form>
-          <textarea
-            ref={textareaRef}
-            value={value}
-            onInput={handleInput}
-            onKeyDown={handleKeyDown}
-            placeholder="Write your thoughts..."
-            className="writing-area"
-          />
+          <div>
+            <textarea
+              ref={textareaRef}
+              value={value}
+              onInput={handleInput}
+              onKeyDown={handleKeyDown}
+              placeholder="Write your thoughts..."
+              className="writing-area"
+            />
+            <div className="h-40" />
+          </div>
         </form>
       </div>
     </div>
