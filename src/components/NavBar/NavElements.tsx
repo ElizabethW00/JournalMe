@@ -1,26 +1,27 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, SetStateAction, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import Scribble from "@/components/Scribble";
 import "./NavBar.css";
+import { useRouter, usePathname } from "next/navigation";
+import clsx from "clsx";
 
-export const NavTab = ({
-  name,
-  path,
-  className,
-}: {
+type NavTabProps = {
   name: string;
   path: string;
   className?: string;
-}) => {
+  onClick?: () => void;
+};
+
+export const NavTab = ({ name, path, className, onClick }: NavTabProps) => {
   const pathname = usePathname();
   const isActive = pathname === path;
 
   return (
     <Link
       href={path}
-      className={`hyperlink ${className} ${isActive ? "font-bold" : ""}`}
+      className={clsx("hyperlink", className, { "font-bold": isActive })}
+      onClick={onClick}
     >
       <p>{name}</p>
       <Scribble
@@ -34,45 +35,70 @@ export const NavTab = ({
   );
 };
 
-export const Hamburger = () => {
-  const [turnToX, setTurnToX] = useState(true);
+export const DesktopNav = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const [curr, setCurr] = useState("");
 
   useEffect(() => {
-    const container = document.querySelector("#hamburger");
-    const line1 = document.querySelector("#line1");
-    const line2 = document.querySelector("#line2");
-    const line3 = document.querySelector("#line3");
+    setCurr(pathname);
+  }, [pathname]);
 
-    const toggle = () => {
-      if (turnToX) {
-        line1?.classList.add("hamburger-1");
-        line2?.classList.add("hamburger-2");
-        line3?.classList.add("hamburger-3");
+  console.log(curr);
 
-        line1?.classList.remove("x-1");
-        line2?.classList.remove("x-2");
-        line3?.classList.remove("x-3");
-      } else {
-        line1?.classList.add("x-1");
-        line2?.classList.add("x-2");
-        line3?.classList.add("x-3");
-
-        line1?.classList.remove("hamburger-1");
-        line2?.classList.remove("hamburger-2");
-        line3?.classList.remove("hamburger-3");
-      }
-      setTurnToX(!turnToX);
-    };
-
-    container?.addEventListener("click", toggle);
-    return () => container?.removeEventListener("click", toggle);
-  }, [turnToX]);
+  const handleExit = async (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setCurr("Journals");
+    router.push("/journals");
+  };
 
   return (
-    <div className="flex flex-col cursor-pointer" id="hamburger">
-      <div id="line1" className="line" />
-      <div id="line2" className="line" />
-      <div id="line3" className="line" />
+    <>
+      {curr === "/write" ? (
+        <div
+          className="bg-[#F3FFF9] rounded-lg py-4 px-8 shadow-button absolute z-10 right-[132px] cursor-pointer hover:scale-105 transition duration-300"
+          onClick={handleExit}
+        >
+          Save & Exit
+        </div>
+      ) : (
+        <>
+          <NavTab
+            name="Write"
+            path="/write"
+            className="w-[41px]"
+            onClick={() => setCurr("write")}
+          />
+          <NavTab
+            name="Journals"
+            path="/journals"
+            className="w-[66px]"
+            onClick={() => setCurr("journals")}
+          />
+          <NavTab
+            name="Calendar"
+            path="/calendar"
+            className="w-[69px]"
+            onClick={() => setCurr("calender")}
+          />
+        </>
+      )}
+    </>
+  );
+};
+
+export const Hamburger = () => {
+  const [active, setActive] = useState(false);
+
+  return (
+    <div
+      className="flex flex-col cursor-pointer"
+      id="hamburger"
+      onClick={() => setActive(!active)}
+    >
+      <div id="line1" className={`line ${active ? "hamburger-1" : "x-1"}`} />
+      <div id="line2" className={`line ${active ? "hamburger-2" : "x-2"}`} />
+      <div id="line3" className={`line ${active ? "hamburger-3" : "x-3"}`} />
     </div>
   );
 };
