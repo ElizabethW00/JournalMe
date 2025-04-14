@@ -4,7 +4,7 @@ const About = () => {
   return (
     <div className="px-6 py-8 max-w-6xl mx-auto">
       <section className="mb-8">
-        <h2 className="text-5xl font-bold mb-4 bad-script">About JournalMe</h2>
+        <h2 className="text-4xl font-bold mb-4 bad-script">About JournalMe</h2>
         <p className="text-lg leading-relaxed">
           JournalMe is a platform designed for focused, distraction-free
           journaling. Whether you're reflecting on your day or tracking your

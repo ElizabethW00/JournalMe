@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { IoAddOutline } from "react-icons/io5";
-import Entry from "@/components/Entry/page";
+import Entry from "@/components/Entry/Entry";
 import Link from "next/link";
 
 const Journals = () => {
