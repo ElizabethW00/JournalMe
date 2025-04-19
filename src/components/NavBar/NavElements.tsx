@@ -20,7 +20,11 @@ export const NavTab = ({ name, path, className, onClick }: NavTabProps) => {
   return (
     <Link
       href={path}
-      className={clsx("hyperlink", className, { "font-bold": isActive })}
+      className={clsx(
+        "hyperlink flex items-center justify-center text-center mt-1",
+        className,
+        { "font-bold": isActive }
+      )}
       onClick={onClick}
     >
       <p>{name}</p>

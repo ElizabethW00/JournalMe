@@ -17,7 +17,7 @@ const Home = async () => {
       {/* center text */}
       <div className="flex flex-col justify-center items-center gap-10 title">
         <h1 className="font-semibold text-7xl lg:text-[100px] bad-script">
-          Journal Me
+          {user ? "Hello, " + user.firstName : "Journal Me"}
         </h1>
         <Scribble
           regular
@@ -29,7 +29,7 @@ const Home = async () => {
         {/* if there is user, say hi */}
         <p className="description">
           {user
-            ? "Hello, " + user.fullName
+            ? "How are we feeling today?"
             : "A platform to express your thoughts in a distraction-free environment"}
         </p>
       </div>
