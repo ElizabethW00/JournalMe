@@ -7,27 +7,35 @@ import Link from "next/link";
 const Journals = () => {
   const [entries, setEntries] = useState([
     {
-      id: 1,
       date: "April 19, 2025",
       excerpt: "Today, I attended the Figma workshop...",
       category: "Work",
       locked: false,
     },
     {
-      id: 2,
+      date: "April 19, 2025",
+      excerpt: "I don't know what to cook today...",
+      category: "Cooking",
+      locked: false,
+    },
+    {
+      date: "April 19, 2025",
+      excerpt: "I hate meetings...",
+      category: "Meeting",
+      locked: false,
+    },
+    {
       date: "Feburary 25, 2025",
       category: "Math HW",
       locked: true,
     },
     {
-      id: 3,
       date: "December 29, 2024",
       excerpt: "I met with Wei today and...",
       category: "Meeting",
       locked: false,
     },
     {
-      id: 4,
       date: "September 13, 2024",
       excerpt: "Tiramisu is suprisingly hard...",
       category: "Cooking",
@@ -37,14 +45,14 @@ const Journals = () => {
 
   const handleToggleLock = (id: number) => {
     setEntries((prev) =>
-      prev.map((entry) =>
-        entry.id === id ? { ...entry, locked: !entry.locked } : entry
+      prev.map((entry, index) =>
+        index === id ? { ...entry, locked: !entry.locked } : entry
       )
     );
   };
 
   const handleDelete = (id: number) => {
-    setEntries((prev) => prev.filter((entry) => entry.id !== id));
+    setEntries((prev) => prev.filter((entry, index) => index !== id));
   };
 
   return (
@@ -56,8 +64,10 @@ const Journals = () => {
         </Link>
       </div>
       <div className="mt-6">
-        {entries.map((entry) => (
+        {entries.map((entry, index) => (
           <Entry
+            key={"JOURNAL ENTRY " + index}
+            id={index}
             {...entry}
             onDelete={handleDelete}
             onToggleLock={handleToggleLock}
