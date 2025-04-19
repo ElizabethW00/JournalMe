@@ -6,12 +6,33 @@ import Link from "next/link";
 
 const Journals = () => {
   const [entries, setEntries] = useState([
-    { id: 1, name: "Journal 1", date: "September 5, 2025", locked: false },
-    { id: 2, name: "Journal 2", date: "September 6, 2025", locked: true },
-    { id: 3, name: "Journal 3", date: "September 5, 2025", locked: false },
-    { id: 4, name: "Journal 4", date: "September 5, 2025", locked: false },
-    { id: 5, name: "Journal 5", date: "September 5, 2025", locked: false },
-    // add more entries here
+    {
+      id: 1,
+      date: "April 19, 2025",
+      excerpt: "Today, I attended the Figma workshop...",
+      category: "Work",
+      locked: false,
+    },
+    {
+      id: 2,
+      date: "Feburary 25, 2025",
+      category: "Math HW",
+      locked: true,
+    },
+    {
+      id: 3,
+      date: "December 29, 2024",
+      excerpt: "I met with Wei today and...",
+      category: "Meeting",
+      locked: false,
+    },
+    {
+      id: 4,
+      date: "September 13, 2024",
+      excerpt: "Tiramisu is suprisingly hard...",
+      category: "Cooking",
+      locked: false,
+    },
   ]);
 
   const handleToggleLock = (id: number) => {
@@ -37,11 +58,7 @@ const Journals = () => {
       <div className="mt-6">
         {entries.map((entry) => (
           <Entry
-            key={entry.id}
-            id={entry.id}
-            name={entry.name}
-            date={entry.date}
-            locked={entry.locked}
+            {...entry}
             onDelete={handleDelete}
             onToggleLock={handleToggleLock}
           />

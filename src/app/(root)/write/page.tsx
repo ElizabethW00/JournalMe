@@ -97,10 +97,10 @@ const Write = () => {
         textarea.value =
           value.substring(0, start) +
           "\n" +
-          `${nextNumber}.    ` +
+          `${nextNumber}.  ` +
           value.substring(end);
         textarea.selectionStart = textarea.selectionEnd =
-          start + `${nextNumber}.    `.length;
+          start + `${nextNumber}.  `.length;
         e.preventDefault();
       }
     }
