@@ -1,21 +1,24 @@
 "use client";
-import React, { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import "./write.css";
 
 const Write = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [value, setValue] = useState<string>("");
-
   const autoGrow = () => {
     const textarea = textareaRef.current;
     if (textarea) {
-      textarea.style.height = "auto";
       textarea.style.height = textarea.scrollHeight + "px";
     }
   };
 
+  useEffect(autoGrow, [value]);
+
   // Handle input change and format the lines
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
     let inputValue = e.target.value;
 
     // Detect lines and format them into lists
@@ -39,17 +42,6 @@ const Write = () => {
 
     // Update the state with formatted value
     setValue(inputValue);
-
-    // Adjust textarea height based on content
-    const textarea = textareaRef.current;
-    if (textarea) {
-      textarea.style.height = "auto"; // Reset height
-      textarea.style.height = textarea.scrollHeight + "px"; // Grow to fit content
-
-      textarea.scrollIntoView({ behavior: "auto", block: "nearest" });
-    }
-
-    autoGrow();
   };
 
   // Handle Tab key for indentation and Enter key for continuing list
@@ -61,11 +53,10 @@ const Write = () => {
 
     // Handle Tab key for indentation
     if (e.key === "Tab") {
-      e.preventDefault();
       const tabSpace = "  "; // Adjust tab space if necessary
-      textarea.value =
-        value.substring(0, start) + tabSpace + value.substring(end);
+      setValue(value.substring(0, start) + tabSpace + value.substring(end));
       textarea.selectionStart = textarea.selectionEnd = start + tabSpace.length;
+      e.preventDefault();
     }
 
     // Handle Enter key to continue bullet or numbered list
@@ -74,39 +65,79 @@ const Write = () => {
 
       // Detect bullet or numbered list and continue
       if (prevLine.startsWith("- ") || prevLine.startsWith("• ")) {
-        textarea.value =
-          value.substring(0, start) + "\n• " + value.substring(end); // Continue bullet list
-        textarea.selectionStart = textarea.selectionEnd = start + 3; // Move cursor after the bullet
+        setValue(value.substring(0, start) + "\n• " + value.substring(end));
+        textarea.selectionStart = textarea.selectionEnd = end; // Move cursor after the bullet
+        textarea.scrollTop = textarea.scrollHeight - textarea.clientHeight + 24;
         e.preventDefault();
-      } else if (/^\d+\.\s/.test(prevLine)) {
-        // Get the last number in the numbered list
-        const lines = value.split("\n");
-        let lastNumber = 0;
-        // Loop backwards through the lines to find the last numbered line
-        for (let i = lines.length - 1; i >= 0; i--) {
-          const line = lines[i];
-          const numberMatch = line.match(/^(\d+)\.\s/);
-          if (numberMatch) {
-            lastNumber = parseInt(numberMatch[1], 10);
-            break;
-          }
-        }
-
-        // Insert the next number
-        const nextNumber = lastNumber + 1;
-        textarea.value =
-          value.substring(0, start) +
-          "\n" +
-          `${nextNumber}.  ` +
-          value.substring(end);
-        textarea.selectionStart = textarea.selectionEnd =
-          start + `${nextNumber}.  `.length;
-        e.preventDefault();
+        autoGrow();
       }
     }
 
-    autoGrow();
-    textarea.scrollIntoView({ behavior: "auto", block: "nearest" });
+    // Bold toggle
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "b") {
+      e.preventDefault();
+      const selectedText = value.substring(start, end);
+      const isBold =
+        selectedText.startsWith("**") && selectedText.endsWith("**");
+
+      const newText = isBold
+        ? selectedText.slice(2, -2) // remove ** **
+        : `**${selectedText}**`;
+
+      setValue(value.substring(0, start) + newText + value.substring(end));
+
+      requestAnimationFrame(() => {
+        if (textareaRef.current) {
+          const offset = isBold ? -2 : 2;
+          textareaRef.current.selectionStart = start + (isBold ? 0 : 2);
+          textareaRef.current.selectionEnd = end + offset;
+        }
+      });
+    }
+
+    // Italic toggle
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "i") {
+      e.preventDefault();
+      const selectedText = value.substring(start, end);
+      const isItalic =
+        selectedText.startsWith("*") && selectedText.endsWith("*");
+
+      const newText = isItalic
+        ? selectedText.slice(1, -1)
+        : `*${selectedText}*`;
+
+      setValue(value.substring(0, start) + newText + value.substring(end));
+
+      requestAnimationFrame(() => {
+        if (textareaRef.current) {
+          const offset = isItalic ? -1 : 1;
+          textareaRef.current.selectionStart = start + (isItalic ? 0 : 1);
+          textareaRef.current.selectionEnd = end + offset;
+        }
+      });
+    }
+
+    // Underline toggle
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "u") {
+      e.preventDefault();
+      const selectedText = value.substring(start, end);
+      const isUnderlined =
+        selectedText.startsWith("<u>") && selectedText.endsWith("</u>");
+
+      const newText = isUnderlined
+        ? selectedText.slice(3, -4)
+        : `<u>${selectedText}</u>`;
+
+      setValue(value.substring(0, start) + newText + value.substring(end));
+
+      requestAnimationFrame(() => {
+        if (textareaRef.current) {
+          const offset = isUnderlined ? -3 : 3;
+          textareaRef.current.selectionStart = start + (isUnderlined ? 0 : 3);
+          textareaRef.current.selectionEnd = end + offset;
+        }
+      });
+    }
   };
 
   // Format today's date for display
@@ -133,9 +164,11 @@ const Write = () => {
               onInput={handleInput}
               onKeyDown={handleKeyDown}
               placeholder="Write your thoughts..."
-              className="writing-area"
+              className="writing-area "
             />
-            <div className="h-40" />
+            {/* <div className="preview ">
+              <ReactMarkdown rehypePlugins={[rehypeRaw]}>{value}</ReactMarkdown>
+            </div> */}
           </div>
         </form>
       </div>
