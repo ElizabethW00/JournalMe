@@ -75,3 +75,11 @@ form {
   background: transparent;
   line-height: 1.5;
 }
+
+
+.preview {
+  margin-top: 2rem;
+  padding: 1rem;
+  font-size: 16px;
+  line-height: 1.6;
+}
