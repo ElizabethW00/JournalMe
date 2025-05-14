@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import Provider from "@/components/Provider";
 import NavBar from "@/components/NavBar/NavBar";
+import { Toaster } from "react-hot-toast";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -32,6 +33,7 @@ export default async function RootLayout({
           <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
+            <Toaster />
             <NavBar />
             {children}
           </body>

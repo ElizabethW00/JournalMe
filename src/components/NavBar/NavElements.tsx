@@ -1,9 +1,9 @@
 "use client";
-import { useState, SetStateAction, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Scribble from "@/components/Scribble";
 import "./NavBar.css";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
 type NavTabProps = {
@@ -36,7 +36,6 @@ export const NavTab = ({ name, path, className, onClick }: NavTabProps) => {
 };
 
 export const DesktopNav = () => {
-  const router = useRouter();
   const pathname = usePathname();
   const [curr, setCurr] = useState("");
 
@@ -44,28 +43,13 @@ export const DesktopNav = () => {
     setCurr(pathname);
   }, [pathname]);
 
-  console.log(curr);
-
-  const handleExit = async (e: React.MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setCurr("Journals");
-    router.push("/journals");
-  };
-
   return (
     <>
-      {curr === "/write" ? (
-        <div
-          className="bg-[#F3FFF9] rounded-lg py-4 px-8 shadow-button absolute z-10 right-[132px] cursor-pointer hover:scale-105 transition duration-300"
-          onClick={handleExit}
-        >
-          Save & Exit
-        </div>
-      ) : (
+      {!curr.includes("/write") && (
         <>
           <NavTab
             name="Write"
-            path="/write"
+            path="/write/"
             className="w-[41px]"
             onClick={() => setCurr("write")}
           />
@@ -80,6 +64,12 @@ export const DesktopNav = () => {
             path="/calendar"
             className="w-[69px]"
             onClick={() => setCurr("calender")}
+          />
+          <NavTab
+            name="About"
+            path="/about"
+            className="w-[46px]"
+            onClick={() => setCurr("about")}
           />
         </>
       )}
