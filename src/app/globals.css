@@ -35,6 +35,13 @@
   border-radius: 30;
   box-shadow: 5px 2px 20px 1px rgb(198, 198, 198);
 }
+.shadow-button-bottom-only {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30;
+  box-shadow: 5px 7px 7px 1px rgb(198, 198, 198);
+}
 
 /* HANDLES SCRIBBLE ANIMATION WHEN HOVERING OVER HYPERLINKS */
 .hyperlink {
@@ -62,6 +69,6 @@
     @apply bg-[#f3fff9];
   }
   .animate-bigger {
-    @apply hover:scale-110 transition-transform duration-500 ease-in-out
+    @apply hover:scale-110 transition-transform duration-500 ease-in-out;
   }
 }

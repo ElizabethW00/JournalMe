@@ -3,9 +3,11 @@ import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import "./write.css";
+import { use } from "react";
+import "../write.css";
 
-const Write = () => {
+const Write = (props: { params: Promise<{ journalId?: string }> }) => {
+  const { journalId } = use(props.params);
   const router = useRouter();
 
   const today = new Date().toLocaleDateString("en-US", {

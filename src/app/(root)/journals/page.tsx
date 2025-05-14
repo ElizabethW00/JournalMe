@@ -1,59 +1,16 @@
-"use client";
-import React, { useState } from "react";
 import { IoAddOutline } from "react-icons/io5";
 import Entry from "@/components/Entry/Entry";
 import Link from "next/link";
+import { currentUser } from "@clerk/nextjs/server";
+import { getAllJournals } from "@/lib/actions/journal.actions";
 
-const Journals = () => {
-  const [entries, setEntries] = useState([
-    {
-      date: "April 19, 2025",
-      excerpt: "Today, I attended the Figma workshop...",
-      category: "Work",
-      locked: false,
-    },
-    {
-      date: "April 19, 2025",
-      excerpt: "I don't know what to cook today...",
-      category: "Cooking",
-      locked: false,
-    },
-    {
-      date: "April 19, 2025",
-      excerpt: "I hate meetings...",
-      category: "Meeting",
-      locked: false,
-    },
-    {
-      date: "Feburary 25, 2025",
-      category: "Math HW",
-      locked: true,
-    },
-    {
-      date: "December 29, 2024",
-      excerpt: "I met with Wei today and...",
-      category: "Meeting",
-      locked: false,
-    },
-    {
-      date: "September 13, 2024",
-      excerpt: "Tiramisu is suprisingly hard...",
-      category: "Cooking",
-      locked: false,
-    },
-  ]);
+const Journals = async () => {
+  const user = await currentUser();
+  const journals = await getAllJournals(user!.id);
 
-  const handleToggleLock = (id: number) => {
-    setEntries((prev) =>
-      prev.map((entry, index) =>
-        index === id ? { ...entry, locked: !entry.locked } : entry
-      )
-    );
-  };
+  const handleToggleLock = (id: number) => {};
 
-  const handleDelete = (id: number) => {
-    setEntries((prev) => prev.filter((entry, index) => index !== id));
-  };
+  const handleDelete = (id: number) => {};
 
   return (
     <div className="px-6 py-8 max-w-6xl mx-auto">
@@ -64,7 +21,7 @@ const Journals = () => {
         </Link>
       </div>
       <div className="mt-6">
-        {entries.map((entry, index) => (
+        {journals.map((entry: any, index: number) => (
           <Entry
             key={"JOURNAL ENTRY " + index}
             id={index}

@@ -17,8 +17,6 @@ const NavBar = async () => {
       <div className="links hidden sm:flex">
         {user && <DesktopNav />}
 
-        <NavTab name="About" path="/about" className="w-[46px]" />
-
         {user ? (
           <UserButton />
         ) : (

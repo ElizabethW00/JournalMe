@@ -3,9 +3,11 @@ import Link from "next/link";
 import Scribble from "@/components/Scribble";
 import { currentUser } from "@clerk/nextjs/server";
 import "./home.css";
+import { createUser } from "@/lib/actions/user.actions";
 
 const Home = async () => {
   const user = await currentUser();
+  if (user) createUser(user.id);
 
   return (
     <section className="flex flex-col w-screen h-[calc(100vh-113px)] items-center justify-center text-center gap-[5rem] home">

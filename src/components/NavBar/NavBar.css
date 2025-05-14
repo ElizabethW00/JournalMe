@@ -18,114 +18,133 @@
   width: 107px;
 }
 
-
 /* HAMBURGER ANIMATIONS */
-:root{
+:root {
   --hamburger-line-height: 3px;
   --hamburger-line-width: 25px;
   --hamburger-line-gap: 4px;
 }
 
 #hamburger {
-  gap: var(--hamburger-line-gap)
+  gap: var(--hamburger-line-gap);
 }
 
 .line {
-   background-color: black;
-   width: var(--hamburger-line-width);
-   height: var(--hamburger-line-height);
-   border-radius: 5px;
-   opacity: 70%;
+  background-color: black;
+  width: var(--hamburger-line-width);
+  height: var(--hamburger-line-height);
+  border-radius: 5px;
+  opacity: 70%;
 }
 
 .hamburger-1 {
-	animation-name: animate-1;
-	animation-duration: 0.50s;
-	animation-fill-mode: forwards;
+  animation-name: animate-1;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
 }
 .hamburger-2 {
-	animation-name: animate-2;
-	animation-duration: 0.50s;
-	animation-fill-mode: forwards;
+  animation-name: animate-2;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
 }
 .hamburger-3 {
-	animation-name: animate-3;
-	animation-duration: 0.50s;
-	animation-fill-mode: forwards;
+  animation-name: animate-3;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
 }
 @keyframes animate-1 {
-	0% {
-		transform: translateY(0px);
-	}
+  0% {
+    transform: translateY(0px);
+  }
   50% {
-		transform: translateY(calc(var(--hamburger-line-height) + var(--hamburger-line-gap)));
+    transform: translateY(
+      calc(var(--hamburger-line-height) + var(--hamburger-line-gap))
+    );
   }
   100% {
-		transform: translateY(calc(var(--hamburger-line-height) + var(--hamburger-line-gap))) rotate(45deg); 
-	}
+    transform: translateY(
+        calc(var(--hamburger-line-height) + var(--hamburger-line-gap))
+      )
+      rotate(45deg);
+  }
 }
 @keyframes animate-2 {
-	0% {
-		transform: scale(1);
-	}
-	100% {
-		transform: scale(0);
-	}
-}
-@keyframes animate-3 {
-	0% {
-		transform: translateY(0px);
-	}
-  50% {
-		transform: translateY(calc((var(--hamburger-line-height) + var(--hamburger-line-gap)) * -1));
+  0% {
+    transform: scale(1);
   }
   100% {
-		transform: translateY(calc((var(--hamburger-line-height) + var(--hamburger-line-gap)) * -1)) rotate(135deg); 
-	}
+    transform: scale(0);
+  }
+}
+@keyframes animate-3 {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(
+      calc((var(--hamburger-line-height) + var(--hamburger-line-gap)) * -1)
+    );
+  }
+  100% {
+    transform: translateY(
+        calc((var(--hamburger-line-height) + var(--hamburger-line-gap)) * -1)
+      )
+      rotate(135deg);
+  }
 }
 
 .x-1 {
-	animation-name: reverse-1;
-	animation-duration: 0.50s;
-	animation-fill-mode: forwards;
+  animation-name: reverse-1;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
 }
 .x-2 {
-	animation-name: reverse-2;
-	animation-duration: 0.50s;
-	animation-fill-mode: forwards;
+  animation-name: reverse-2;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
 }
 .x-3 {
-	animation-name: reverse-3;
-	animation-duration: 0.50s;
-	animation-fill-mode: forwards;
+  animation-name: reverse-3;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
 }
 @keyframes reverse-1 {
-	0% {
-		transform: translateY(calc(var(--hamburger-line-height) + var(--hamburger-line-gap))) rotate(45deg);
-	}
+  0% {
+    transform: translateY(
+        calc(var(--hamburger-line-height) + var(--hamburger-line-gap))
+      )
+      rotate(45deg);
+  }
   50% {
-  transform: translateY(calc(var(--hamburger-line-height) + var(--hamburger-line-gap)));
+    transform: translateY(
+      calc(var(--hamburger-line-height) + var(--hamburger-line-gap))
+    );
   }
   100% {
-		transform: translateY(0px);
-	}
+    transform: translateY(0px);
+  }
 }
 @keyframes reverse-2 {
-	0% {
-		transform: scale(0);
-	}
-	100% {
-		transform: scale(1);
-	}
-}
-@keyframes reverse-3 {
-	0% {
-		transform: translateY(calc((var(--hamburger-line-height) + var(--hamburger-line-gap)) * -1)) rotate(135deg); 
-	}
-  50% {
-		transform: translateY(calc((var(--hamburger-line-height) + var(--hamburger-line-gap)) * -1));
+  0% {
+    transform: scale(0);
   }
   100% {
-		transform: translateY(0); 
-	}
+    transform: scale(1);
+  }
+}
+@keyframes reverse-3 {
+  0% {
+    transform: translateY(
+        calc((var(--hamburger-line-height) + var(--hamburger-line-gap)) * -1)
+      )
+      rotate(135deg);
+  }
+  50% {
+    transform: translateY(
+      calc((var(--hamburger-line-height) + var(--hamburger-line-gap)) * -1)
+    );
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
