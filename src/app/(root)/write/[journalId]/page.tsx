@@ -7,10 +7,11 @@ import "../write.css";
 
 const Write = ({ params }: { params: Promise<{ journalId?: string }> }) => {
   const router = useRouter();
-  // const { journalId } = use(params);
   const [journalId, setJournalId] = useState<string | undefined>(
     use(params).journalId
   );
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [value, setValue] = useState<string>("");
 
   const today = new Date();
   useEffect(() => {
@@ -50,9 +51,6 @@ const Write = ({ params }: { params: Promise<{ journalId?: string }> }) => {
       toast.error("Error saving journal.");
     }
   };
-
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [value, setValue] = useState<string>("");
 
   const autoGrow = () => {
     const textarea = textareaRef.current;
