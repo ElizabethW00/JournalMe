@@ -41,7 +41,7 @@ const Write = ({ params }: { params: Promise<{ journalId?: string }> }) => {
 
       if (response.status === 200) {
         toast.success("Successfully saved journal!");
-        setTimeout(() => router.push("/journals"), 500);
+        setTimeout(() => router.push("/journals"), 300);
       } else {
         toast.error("Failed to save journal.");
       }
