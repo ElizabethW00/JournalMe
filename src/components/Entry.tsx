@@ -70,6 +70,14 @@ const Entry = ({
         onClick={handleEdit}
       >
         <div>
+          {!isLocked ? (
+            <div
+              className="w-5 h-5 cursor-pointer rounded-full transition-transform duration-200 ease-in-out hover:scale-110 "
+              style={{ backgroundColor: color }}
+            ></div>
+          ) : null}
+        </div>
+        <div>
           <h1 className="font-semibold text-lg">{date_created}</h1>
           <h3 className="font-light text-sm">Last edited: {last_edited}</h3>
         </div>
