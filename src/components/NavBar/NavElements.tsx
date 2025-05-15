@@ -35,7 +35,12 @@ export const NavTab = ({ name, path, className, onClick }: NavTabProps) => {
   );
 };
 
-export const NavTabHamburger = ({ name, path, className, onClick }: NavTabProps) => {
+export const NavTabHamburger = ({
+  name,
+  path,
+  className,
+  onClick,
+}: NavTabProps) => {
   const pathname = usePathname();
   const isActive = pathname === path;
 
@@ -110,7 +115,7 @@ export const Hamburger = () => {
     <div className="relative">
       {/* Hamburger icon */}
       <div
-        className="fixed top-4 right-4 z-60 flex flex-col gap-1 cursor-pointer"
+        className="fixed z-60 top-10 flex flex-col gap-1 cursor-pointer"
         id="hamburger"
         onClick={() => setActive(!active)}
       >
