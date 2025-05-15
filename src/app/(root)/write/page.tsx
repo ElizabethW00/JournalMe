@@ -23,7 +23,7 @@ const Write = () => {
 
     if (response.status === 200) {
       toast.success("Successfully saved journal!");
-      setTimeout(() => router.push("/journals"), 500);
+      setTimeout(() => router.push("/journals"), 300);
     } else {
       toast.error("Error: failed to save journal. Try again later");
     }

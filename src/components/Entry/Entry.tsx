@@ -51,7 +51,7 @@ const Entry = ({
   };
 
   const handleEdit = async (e: MouseEvent) => {
-    router.push(`/write/${_id}`);
+    if (!isLocked) router.push(`/write/${_id}`);
   };
 
   return (
@@ -60,7 +60,12 @@ const Entry = ({
         isLocked ? "bg-gray-200" : "bg-white"
       } hover:shadow-md hover:translate-y-1 ${isDeleted && `hidden`}`}
     >
-      <div className="flex flex-row gap-12 items-center justify-center">
+      <div
+        className={`flex flex-row gap-12 items-center justify-center ${
+          !isLocked && "cursor-pointer"
+        }`}
+        onClick={handleEdit}
+      >
         <div>
           <h1 className="font-semibold text-lg">{date_created}</h1>
           <h3 className="font-light text-sm">Last edited: {last_edited}</h3>
