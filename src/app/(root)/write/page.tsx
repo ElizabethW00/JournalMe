@@ -8,26 +8,22 @@ import "./write.css";
 const Write = () => {
   const router = useRouter();
 
-  const today = new Date().toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const today = new Date();
+
   const handleExit = async (event: any) => {
     if (value === "") {
       router.push("/journals");
       return;
     }
 
-    const response = await axios.post("/api/createJournal", {
+    const response = await axios.post("/api/journals", {
       date: today,
       text: value,
     });
 
     if (response.status === 200) {
       toast.success("Successfully saved journal!");
-      setTimeout(() => router.push("/journals"), 1000);
+      setTimeout(() => router.push("/journals"), 500);
     } else {
       toast.error("Error: failed to save journal. Try again later");
     }
@@ -183,7 +179,14 @@ const Write = () => {
       </div>
 
       <div className="platform">
-        <p className="date">{today}</p>
+        <p className="date">
+          {today.toLocaleDateString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </p>
         <form>
           <div>
             <textarea
