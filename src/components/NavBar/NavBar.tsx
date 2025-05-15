@@ -15,7 +15,7 @@ const NavBar = async () => {
 
       {/* DESKTOP LINK TABS */}
       <div className="links hidden sm:flex">
-        {user && <DesktopNav />}
+        <DesktopNav hasUser={!!user} />
 
         {user ? (
           <UserButton />

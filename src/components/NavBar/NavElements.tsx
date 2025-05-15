@@ -35,13 +35,23 @@ export const NavTab = ({ name, path, className, onClick }: NavTabProps) => {
   );
 };
 
-export const DesktopNav = () => {
+export const DesktopNav = ({ hasUser }: { hasUser: boolean }) => {
   const pathname = usePathname();
   const [curr, setCurr] = useState("");
 
   useEffect(() => {
     setCurr(pathname);
   }, [pathname]);
+
+  if (!hasUser)
+    return (
+      <NavTab
+        name="About"
+        path="/about"
+        className="w-[46px]"
+        onClick={() => setCurr("about")}
+      />
+    );
 
   return (
     <>
