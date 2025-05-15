@@ -69,10 +69,10 @@ const Calendar = () => {
   return (
     <section
       id="calendarWrapper"
-      className="flex w-full justify-evenly items-center gap-4 px-12 overflow-x-hidden"
+      className="flex w-full justify-evenly items-center sm:gap-4 sm:px-12 overflow-x-hidden"
     >
       {/* Sidebar with custom view buttons */}
-      <div className="flex flex-col p-4">
+      <div className="flex flex-col sm:p-4">
         <ChangeViewButton
           text={"Day"}
           view={"timeGridDay"}
