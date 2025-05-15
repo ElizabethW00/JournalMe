@@ -2,6 +2,7 @@
 import { connectToDB } from "../mongoose";
 import Journal from "../models/journal.model";
 import { getUser } from "./user.actions";
+import User from "../models/user.model";
 
 export async function getJournalById(journalId: string) {
   try {
@@ -59,7 +60,7 @@ export async function deleteJournalById(journalId: string) {
         }
       }
 
-      await journal.delete();
+      await Journal.findByIdAndDelete(journalId);
     }
   } catch (error: any) {
     throw new Error(
@@ -71,17 +72,16 @@ export async function deleteJournalById(journalId: string) {
 export async function getAllJournals(user_id: string) {
   try {
     connectToDB();
-    const user = await getUser(user_id);
-    const arr = user.journal_ids.map(
-      async (id: string) => await getJournalById(id)
-    );
-    return arr;
+    const user = await User.findOne({ user_id }).populate("journal_ids");
+    user.journal_ids.sort((a: any, b: any) => b.date_created - a.date_created);
+    return user.journal_ids;
   } catch (error: any) {
     throw new Error(
       `Fail to get journals with  user_id: ${user_id} error: ${error.message}`
     );
   }
 }
+
 type JournalInitial = {
   date_created: Date;
   text: string;

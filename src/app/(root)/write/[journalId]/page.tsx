@@ -1,42 +1,59 @@
 "use client";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, use } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import { use } from "react";
 import "../write.css";
 
-const Write = (props: { params: Promise<{ journalId?: string }> }) => {
-  const { journalId } = use(props.params);
+const Write = ({ params }: { params: Promise<{ journalId?: string }> }) => {
   const router = useRouter();
+  // const { journalId } = use(params);
+  const [journalId, setJournalId] = useState<string | undefined>(
+    use(params).journalId
+  );
 
-  const today = new Date().toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-  const handleExit = async (event: any) => {
-    if (value === "") {
-      router.push("/journals");
-      return;
+  const today = new Date();
+  useEffect(() => {
+    if (journalId) {
+      setJournalId(journalId);
+
+      axios
+        .post("/api/journals", { journalId })
+        .then((res) => {
+          if (res.data?.journal?.text) {
+            setValue(res.data.journal.text);
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching journal:", err);
+          toast.error("Failed to load journal.");
+        });
     }
+  }, [journalId]);
 
-    const response = await axios.post("/api/createJournal", {
-      date: today,
-      text: value,
-    });
+  const handleExit = async () => {
+    try {
+      const response = await axios.post("/api/journals", {
+        date: today,
+        text: value,
+        journalId,
+      });
 
-    if (response.status === 200) {
-      toast.success("Successfully saved journal!");
-      setTimeout(() => router.push("/journals"), 1000);
-    } else {
-      toast.error("Error: failed to save journal. Try again later");
+      if (response.status === 200) {
+        toast.success("Successfully saved journal!");
+        setTimeout(() => router.push("/journals"), 500);
+      } else {
+        toast.error("Failed to save journal.");
+      }
+    } catch (err) {
+      console.error("Save error:", err);
+      toast.error("Error saving journal.");
     }
   };
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [value, setValue] = useState<string>("");
+
   const autoGrow = () => {
     const textarea = textareaRef.current;
     if (textarea) {
@@ -185,7 +202,14 @@ const Write = (props: { params: Promise<{ journalId?: string }> }) => {
       </div>
 
       <div className="platform">
-        <p className="date">{today}</p>
+        <p className="date">
+          {today.toLocaleDateString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </p>
         <form>
           <div>
             <textarea

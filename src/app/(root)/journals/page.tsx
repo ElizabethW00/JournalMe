@@ -8,10 +8,6 @@ const Journals = async () => {
   const user = await currentUser();
   const journals = await getAllJournals(user!.id);
 
-  const handleToggleLock = (id: number) => {};
-
-  const handleDelete = (id: number) => {};
-
   return (
     <div className="px-6 py-8 max-w-6xl mx-auto">
       <div className="flex flex-row justify-between">
@@ -21,15 +17,19 @@ const Journals = async () => {
         </Link>
       </div>
       <div className="mt-6">
-        {journals.map((entry: any, index: number) => (
-          <Entry
-            key={"JOURNAL ENTRY " + index}
-            id={index}
-            {...entry}
-            onDelete={handleDelete}
-            onToggleLock={handleToggleLock}
-          />
-        ))}
+        {journals.map((entry: any, index: number) => {
+          return (
+            <Entry
+              key={"JOURNAL ENTRY " + index}
+              _id={entry._id.toString()}
+              date_created={entry.date_created.toDateString()}
+              text={entry.text}
+              user_id={entry.user_id}
+              locked={entry.locked}
+              last_edited={entry.last_edited.toDateString()}
+            />
+          );
+        })}
       </div>
     </div>
   );

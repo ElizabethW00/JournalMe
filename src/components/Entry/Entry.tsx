@@ -1,102 +1,104 @@
-import clsx from "clsx";
+"use client";
+import {
+  deleteJournalById,
+  updateJournalById,
+} from "@/lib/actions/journal.actions";
+import { useState } from "react";
 import {
   IoLockClosed,
   IoLockOpen,
   IoCreateOutline,
   IoTrashOutline,
 } from "react-icons/io5";
-
-const ColorMap: {
-  [key: string]: string;
-} = {
-  "Math HW": "text-[#4F6C94] border-[#4F6C94]",
-  Cooking: "text-[#4B7465] border-[#4B7465]",
-  Work: "text-[#904F94] border-[#904F94]",
-  Meeting: "text-[#AA142D] border-[#AA142D]",
-};
-
-const CategoryIcon = ({
-  category,
-  className,
-}: {
-  category?: string;
-  className: string;
-}) => {
-  if (!category) return;
-
-  return (
-    <div
-      className={clsx(
-        className,
-        ColorMap[category],
-        "flex border-2 w-fit p-2 rounded-full items-center justify-center min-w-[100px]"
-      )}
-    >
-      {category}
-    </div>
-  );
-};
+import { MouseEvent } from "react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 type EntryProps = {
-  id: number;
-  date?: string;
-  excerpt?: string;
-  category?: string;
-  locked?: boolean;
-  onDelete?: (id: number) => void;
-  onToggleLock?: (id: number) => void;
+  _id: string;
+  date_created: string;
+  text: string;
+  user_id: string;
+  locked: boolean;
+  last_edited: string;
 };
 const Entry = ({
-  id,
-  date,
-  excerpt,
-  category,
-  locked = false,
-  onDelete,
-  onToggleLock,
+  _id,
+  date_created,
+  text,
+  locked,
+  last_edited,
 }: EntryProps) => {
-  const handleEntryClick = () => {
-    if (!locked) {
-      console.log("Go to journal detail page");
-    }
+  const router = useRouter();
+  const [isLocked, setIsLocked] = useState(locked);
+  const [isDeleted, setIsDeleted] = useState(false);
+
+  const toggleLock = async (e: MouseEvent) => {
+    await updateJournalById({
+      journalId: _id,
+      text: text,
+      date: new Date(),
+      locked: !isLocked,
+    });
+
+    setIsLocked(!isLocked);
   };
 
-  const toggleLock = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    onToggleLock?.(id);
+  const handleDelete = async (e: MouseEvent) => {
+    await deleteJournalById(_id);
+    setIsDeleted(true);
+    toast.success("Successfully deleted journal!");
   };
 
-  const handleDeleteClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    onDelete?.(id);
+  const handleEdit = async (e: MouseEvent) => {
+    router.push(`/write/${_id}`);
   };
 
   return (
     <div
-      onClick={handleEntryClick}
-      className={`relative flex justify-between items-center border border-gray-100 p-4 rounded-lg mb-4 cursor-pointer transition-all duration-300 ${
-        locked ? "bg-gray-200" : "bg-white"
-      } hover:shadow-md hover:translate-y-1`}
+      className={`relative flex justify-between items-center border border-gray-100 p-4 rounded-lg mb-4 transition-all duration-300 ${
+        isLocked ? "bg-gray-200" : "bg-white"
+      } hover:shadow-md hover:translate-y-1 ${isDeleted && `hidden`}`}
     >
-      <div className="flex gap-6">
-        <p className="font-semibold text-lg">{date}</p>
-        <p className="text-md">{excerpt}</p>
+      <div className="flex flex-row gap-12 items-center justify-center">
+        <div>
+          <h1 className="font-semibold text-lg">{date_created}</h1>
+          <h3 className="font-light text-sm">Last edited: {last_edited}</h3>
+        </div>
+
+        <p>{text.substring(0, 10)} ...</p>
       </div>
 
-      <CategoryIcon
-        className="flex items-center absolute right-1/6 gap-2"
-        category={category}
-      />
-
       <div className="flex items-center gap-4">
-        {!locked && <IoCreateOutline size={22} />}
-        <button onClick={toggleLock}>
-          {locked ? <IoLockClosed size={22} /> : <IoLockOpen size={22} />}
-        </button>
-        {/* <IoCreateOutline size={22} /> */}
-        <button onClick={handleDeleteClick}>
-          <IoTrashOutline size={22} />
-        </button>
+        {!isLocked && (
+          <IoCreateOutline
+            size={22}
+            onClick={handleEdit}
+            className="cursor-pointer"
+          />
+        )}
+
+        {isLocked ? (
+          <IoLockClosed
+            size={22}
+            onClick={toggleLock}
+            className="cursor-pointer"
+          />
+        ) : (
+          <IoLockOpen
+            size={22}
+            onClick={toggleLock}
+            className="cursor-pointer"
+          />
+        )}
+
+        {!isLocked && (
+          <IoTrashOutline
+            size={22}
+            onClick={handleDelete}
+            className="cursor-pointer"
+          />
+        )}
       </div>
     </div>
   );

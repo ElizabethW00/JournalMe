@@ -1,4 +1,8 @@
-import { createJournal } from "@/lib/actions/journal.actions";
+import {
+  createJournal,
+  getJournalById,
+  updateJournalById,
+} from "@/lib/actions/journal.actions";
 import { getUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
@@ -21,13 +25,31 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { date, text } = await request.json();
-    await createJournal({
-      date_created: date,
-      text,
-      user_id: user.id,
-      locked: false,
-    });
+    const { date, text, journalId } = await request.json();
+    // has journal id -> either update or get journal
+    if (journalId) {
+      if (!date && !text) {
+        // find + return journal
+        const journal = await getJournalById(journalId);
+        return NextResponse.json({ journal }, { status: 200 });
+      } else {
+        // update journal
+        await updateJournalById({
+          journalId,
+          text,
+          date,
+          locked: false,
+        });
+      }
+    } else {
+      // create journal
+      await createJournal({
+        date_created: date,
+        text,
+        user_id: user.id,
+        locked: false,
+      });
+    }
 
     return NextResponse.json({ text: "Saved journal" }, { status: 200 });
   } catch (error: any) {
