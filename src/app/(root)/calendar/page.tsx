@@ -115,6 +115,7 @@ const Calendar = () => {
           events={journals.map((journal: any) => {
             const start = new Date(journal.date_created);
             const end = new Date(start.getTime() + 60 * 60 * 1000);
+            console.log(journal.color);
 
             return {
               id: journal._id,
@@ -126,8 +127,8 @@ const Calendar = () => {
               user_id: journal.user_id,
               locked: journal.locked,
               className: !journal.locked ? "cursor-pointer" : undefined,
-              backgroundColor: journal.locked ? "lightgray" : "#3b82f6",
-              borderColor: journal.locked ? "lightgray" : "#3b82f6",
+              backgroundColor: journal.locked ? "lightgray" : journal.color,
+              borderColor: journal.locked ? "lightgray" : journal.color,
             };
           })}
         />

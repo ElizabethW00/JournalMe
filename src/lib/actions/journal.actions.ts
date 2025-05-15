@@ -20,13 +20,15 @@ type JournalType = {
   journalId: string;
   text: string;
   date: Date;
-  locked: Boolean;
+  locked: boolean;
+  color: string;
 };
 export async function updateJournalById({
   journalId,
   text,
   date,
   locked,
+  color,
 }: JournalType) {
   try {
     connectToDB();
@@ -36,6 +38,7 @@ export async function updateJournalById({
     journal.text = text;
     journal.last_edited = date;
     journal.locked = locked;
+    journal.color = color;
     await journal.save();
   } catch (error: any) {
     throw new Error(
@@ -87,12 +90,14 @@ type JournalInitial = {
   text: string;
   user_id: string;
   locked: boolean;
+  color: string;
 };
 export async function createJournal({
   date_created,
   text,
   user_id,
   locked,
+  color,
 }: JournalInitial) {
   try {
     connectToDB();
@@ -102,6 +107,7 @@ export async function createJournal({
       user_id,
       locked,
       last_edited: date_created,
+      color,
     });
 
     const user = await getUser(user_id);
