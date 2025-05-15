@@ -14,4 +14,3 @@ Click the “Sign In” button on the navigation bar.
 
 **Want to sign out?**  
 Click your profile icon to sign out.
-

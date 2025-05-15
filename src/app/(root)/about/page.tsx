@@ -16,7 +16,7 @@ const page = () => {
           <section>
             <h2 className="text-3xl font-bold mb-4">Create an Account</h2>
             <div className="space-y-2 text-lg">
-              <p className="font-semibold">Don’t have an account?</p>
+              <p className="font-semibold">Don&apos;t have an account?</p>
               <p>Click the “Begin” button in the center of the home page.</p>
 
               <p className="font-semibold">Want to log in?</p>
@@ -38,7 +38,9 @@ const page = () => {
         </div>
       </div>
       <section className="py-10">
-        <h2 className="text-3xl font-bold mb-4 text-center">Let’s Begin!</h2>
+        <h2 className="text-3xl font-bold mb-4 text-center">
+          Let&apos;s Begin!
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-10 text-center">
           {/* Step 1 */}
           <div>
