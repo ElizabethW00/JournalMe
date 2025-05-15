@@ -35,6 +35,21 @@ export const NavTab = ({ name, path, className, onClick }: NavTabProps) => {
   );
 };
 
+export const NavTabHamburger = ({ name, path, className, onClick }: NavTabProps) => {
+  const pathname = usePathname();
+  const isActive = pathname === path;
+
+  return (
+    <Link
+      href={path}
+      className={clsx("hyperlink mt-1", className, { "font-bold": isActive })}
+      onClick={onClick}
+    >
+      <p>{name}</p>
+    </Link>
+  );
+};
+
 export const DesktopNav = ({ hasUser }: { hasUser: boolean }) => {
   const pathname = usePathname();
   const [curr, setCurr] = useState("");
@@ -89,16 +104,70 @@ export const DesktopNav = ({ hasUser }: { hasUser: boolean }) => {
 
 export const Hamburger = () => {
   const [active, setActive] = useState(false);
+  const [curr, setCurr] = useState("");
 
   return (
-    <div
-      className="flex flex-col cursor-pointer"
-      id="hamburger"
-      onClick={() => setActive(!active)}
-    >
-      <div id="line1" className={`line ${active ? "hamburger-1" : "x-1"}`} />
-      <div id="line2" className={`line ${active ? "hamburger-2" : "x-2"}`} />
-      <div id="line3" className={`line ${active ? "hamburger-3" : "x-3"}`} />
+    <div className="relative">
+      {/* Hamburger icon */}
+      <div
+        className="fixed top-4 right-4 z-60 flex flex-col gap-1 cursor-pointer"
+        id="hamburger"
+        onClick={() => setActive(!active)}
+      >
+        <div id="line1" className={`line ${active ? "hamburger-1" : "x-1"}`} />
+        <div id="line2" className={`line ${active ? "hamburger-2" : "x-2"}`} />
+        <div id="line3" className={`line ${active ? "hamburger-3" : "x-3"}`} />
+      </div>
+
+      {/* Fullscreen menu */}
+      {active && (
+        <div
+          className="
+            fixed inset-0
+            z-50
+            bg-white
+            flex flex-col items-center justify-center
+            space-y-6
+          "
+        >
+          <NavTabHamburger
+            name="Write"
+            path="/write/"
+            className="text-2xl"
+            onClick={() => {
+              setCurr("write");
+              setActive(false);
+            }}
+          />
+          <NavTabHamburger
+            name="Journals"
+            path="/journals"
+            className="text-2xl"
+            onClick={() => {
+              setCurr("journals");
+              setActive(false);
+            }}
+          />
+          <NavTabHamburger
+            name="Calendar"
+            path="/calendar"
+            className="text-2xl"
+            onClick={() => {
+              setCurr("calendar");
+              setActive(false);
+            }}
+          />
+          <NavTabHamburger
+            name="About"
+            path="/about"
+            className="text-2xl"
+            onClick={() => {
+              setCurr("about");
+              setActive(false);
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 };

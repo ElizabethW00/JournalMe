@@ -192,16 +192,16 @@ const Write = ({ journalId }: { journalId?: string }) => {
 
   return (
     <div className="page">
-      <div
-        className="absolute top-0 right-1/6 bg-[#F3FFF9] rounded-lg py-4 px-8 shadow-button-bottom-only cursor-pointer hover:scale-105 transition duration-300"
-        onClick={handleExit}
-      >
-        Save & Exit
-      </div>
-
       <div className="backTwo">
         <div className="blurBox bg-teal-50"></div>
         <div className="blurBox bg-cyan-50"></div>
+      </div>
+
+      <div
+        className="sm:absolute sm:top-0 sm:right-1/6 bg-[#F3FFF9] rounded-lg py-4 px-8 shadow-button-bottom-only cursor-pointer hover:scale-105 transition duration-300 w-1/2 my-4 sm:w-auto translate-x-1/2 sm:translate-x-0 "
+        onClick={handleExit}
+      >
+        Save & Exit
       </div>
 
       <div className="platform">
