@@ -1,6 +1,4 @@
-import React from "react";
-
-const About = () => {
+const page = () => {
   return (
     <div className="px-6 py-8 max-w-6xl mx-auto">
       <section className="mb-8">
@@ -96,4 +94,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default page;
