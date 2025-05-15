@@ -1,14 +1,19 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import Scribble from "@/components/Scribble";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const Calendar = () => {
+  const [journals, setJournals] = useState([]);
   const [calenderView, setCalenderView] = useState("dayGridMonth");
   const calendarRef = useRef<any>(null);
+  const router = useRouter();
 
   const handleViewChange = (view: string) => {
     const calendarApi = calendarRef.current?.getApi();
@@ -46,6 +51,20 @@ const Calendar = () => {
       </button>
     );
   };
+
+  useEffect(() => {
+    axios
+      .get("/api/journals")
+      .then((res) => {
+        if (res.data?.journals) {
+          setJournals(res.data.journals);
+        }
+      })
+      .catch((err) => {
+        console.error("Error fetching journal:", err);
+        toast.error("Failed to load journal. Try again later!");
+      });
+  }, []);
 
   return (
     <section
@@ -87,13 +106,30 @@ const Calendar = () => {
           selectable={true}
           selectMirror={true} // Mirror selections visually.
           dayMaxEvents={true} // Limit the number of events displayed per day.
-          // eventClick={handleEventClick} // Handle clicking on events (e.g., to delete them).
-          // eventsSet={(events) => setCurrentEvents(events)} // Update state with current events whenever they change.
-          initialEvents={
-            typeof window !== "undefined"
-              ? JSON.parse(localStorage.getItem("events") || "[]")
-              : []
-          } // Initial events loaded from local storage.
+          eventClick={(event: any) => {
+            const journal = event.event._def;
+            if (!journal.extendedProps.locked)
+              router.push(`/write/${journal.publicId}`);
+          }} // Handle clicking on events (e.g., to delete them).
+          // eventsSet={(events) => setJournals(events)} // Update state with current events whenever they change.
+          events={journals.map((journal: any) => {
+            const start = new Date(journal.date_created);
+            const end = new Date(start.getTime() + 60 * 60 * 1000);
+
+            return {
+              id: journal._id,
+              start,
+              end,
+              title: !journal.locked
+                ? journal.text.substring(0, 10) + " ..."
+                : "",
+              user_id: journal.user_id,
+              locked: journal.locked,
+              className: !journal.locked ? "cursor-pointer" : undefined,
+              backgroundColor: journal.locked ? "lightgray" : "#3b82f6",
+              borderColor: journal.locked ? "lightgray" : "#3b82f6",
+            };
+          })}
         />
       </div>
     </section>

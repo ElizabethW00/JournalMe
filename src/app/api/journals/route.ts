@@ -1,5 +1,6 @@
 import {
   createJournal,
+  getAllJournals,
   getJournalById,
   updateJournalById,
 } from "@/lib/actions/journal.actions";
@@ -55,6 +56,26 @@ export async function POST(request: NextRequest) {
   } catch (error: any) {
     return NextResponse.json(
       { error: `Internal error at POST createJournal` },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET() {
+  try {
+    const user = await currentUser();
+    if (!user) {
+      return NextResponse.json(
+        { error: `No valid user at GET createJournal` },
+        { status: 400 }
+      );
+    }
+
+    const journals = await getAllJournals(user.id);
+    return NextResponse.json({ journals }, { status: 200 });
+  } catch (error: any) {
+    return NextResponse.json(
+      { error: `Internal error at GET createJournal` },
       { status: 500 }
     );
   }
