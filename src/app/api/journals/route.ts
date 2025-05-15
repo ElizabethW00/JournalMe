@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { date, text, journalId } = await request.json();
+    const { date, text, journalId, color } = await request.json();
     // has journal id -> either update or get journal
     if (journalId) {
       if (!date && !text) {
@@ -40,6 +40,7 @@ export async function POST(request: NextRequest) {
           text,
           date,
           locked: false,
+          color
         });
       }
     } else {
@@ -49,6 +50,7 @@ export async function POST(request: NextRequest) {
         text,
         user_id: user.id,
         locked: false,
+        color,
       });
     }
 

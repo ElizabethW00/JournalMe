@@ -1,5 +1,5 @@
 import { IoAddOutline } from "react-icons/io5";
-import Entry from "@/components/Entry/Entry";
+import Entry from "@/components/Entry";
 import Link from "next/link";
 import { currentUser } from "@clerk/nextjs/server";
 import { getAllJournals } from "@/lib/actions/journal.actions";
@@ -27,6 +27,7 @@ const Journals = async () => {
               user_id={entry.user_id}
               locked={entry.locked}
               last_edited={entry.last_edited.toDateString()}
+              color={entry.color}
             />
           );
         })}

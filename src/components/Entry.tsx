@@ -21,6 +21,7 @@ type EntryProps = {
   user_id: string;
   locked: boolean;
   last_edited: string;
+  color: string;
 };
 const Entry = ({
   _id,
@@ -28,6 +29,7 @@ const Entry = ({
   text,
   locked,
   last_edited,
+  color,
 }: EntryProps) => {
   const router = useRouter();
   const [isLocked, setIsLocked] = useState(locked);
@@ -39,6 +41,7 @@ const Entry = ({
       text: text,
       date: new Date(),
       locked: !isLocked,
+      color: color,
     });
 
     setIsLocked(!isLocked);
@@ -71,7 +74,7 @@ const Entry = ({
           <h3 className="font-light text-sm">Last edited: {last_edited}</h3>
         </div>
 
-        <p>{text.substring(0, 10)} ...</p>
+        <p>{!isLocked ? text.substring(0, 10) + "..." : null}</p>
       </div>
 
       <div className="flex items-center gap-4">

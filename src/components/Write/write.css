@@ -48,14 +48,12 @@
   font-weight: 600;
   color: #444;
   text-align: left;
-  width: 80%;
-  margin-left: 60px;
 }
 
 /* Form fits inside container */
 form {
   width: 80%;
-  padding: 20px;
+  /* padding: 20px; */
   border-radius: 5px;
 }
 
@@ -63,7 +61,7 @@ form {
 .writing-area {
   width: 100%;
   font-size: 16px;
-  padding: 10px;
+  padding-top: 24px;
   border: none;
   outline: none;
   border-radius: 0;

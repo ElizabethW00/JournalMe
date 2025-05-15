@@ -6,6 +6,7 @@ const journalSchema = new Schema({
   user_id: { type: String, required: true },
   locked: { type: Boolean, required: true },
   last_edited: { type: Date, required: true },
+  color: { type: String, required: true },
 });
 
 const Journal = models.Journal ?? model("Journal", journalSchema);
