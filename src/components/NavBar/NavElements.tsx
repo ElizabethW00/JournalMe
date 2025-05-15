@@ -115,7 +115,7 @@ export const Hamburger = () => {
     <div className="relative">
       {/* Hamburger icon */}
       <div
-        className="fixed z-60 top-10 flex flex-col gap-1 cursor-pointer"
+        className="absolute z-60 top-[-15] flex flex-col gap-1 cursor-pointer"
         id="hamburger"
         onClick={() => setActive(!active)}
       >
