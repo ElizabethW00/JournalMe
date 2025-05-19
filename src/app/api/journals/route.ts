@@ -32,6 +32,12 @@ export async function POST(request: NextRequest) {
       if (!date && !text) {
         // find + return journal
         const journal = await getJournalById(journalId);
+        if (!journal) {
+          return NextResponse.json(
+            { error: "Journal not found" },
+            { status: 404 }
+          );
+        }
         return NextResponse.json({ journal }, { status: 200 });
       } else {
         // update journal

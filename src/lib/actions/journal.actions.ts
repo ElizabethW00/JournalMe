@@ -7,7 +7,10 @@ import User from "../models/user.model";
 export async function getJournalById(journalId: string) {
   try {
     connectToDB();
-    const journal = await Journal.findOne({ _id: journalId });
+    const journal = await Journal.findById(journalId);
+    if (!journal) {
+      throw new Error(`Journal with id ${journalId} not found`);
+    }
     return journal;
   } catch (error: any) {
     throw new Error(
@@ -15,6 +18,7 @@ export async function getJournalById(journalId: string) {
     );
   }
 }
+
 
 type JournalType = {
   journalId: string;

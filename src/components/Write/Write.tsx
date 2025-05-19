@@ -11,6 +11,22 @@ const Write = ({ journalId }: { journalId?: string }) => {
   const [value, setValue] = useState<string>("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+  // useEffect(() => {
+  //   if (journalId) {
+  //     axios
+  //       .post("/api/journals", { journalId })
+  //       .then((res) => {
+  //         if (res.data?.journal?.text) {
+  //           setValue(res.data.journal.text);
+  //           setColor(res.data.journal.color);
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         console.error("Error fetching journal:", err);
+  //         toast.error("Failed to load journal.");
+  //       });
+  //   }
+  // }, [journalId]);
   useEffect(() => {
     if (journalId) {
       axios
@@ -19,6 +35,8 @@ const Write = ({ journalId }: { journalId?: string }) => {
           if (res.data?.journal?.text) {
             setValue(res.data.journal.text);
             setColor(res.data.journal.color);
+          } else {
+            toast.error("No journal found. Create a new one!");
           }
         })
         .catch((err) => {
@@ -27,6 +45,7 @@ const Write = ({ journalId }: { journalId?: string }) => {
         });
     }
   }, [journalId]);
+
 
   const today = new Date();
   const colors = ["#8fc9cc", "#d49996", "#dbab70", "#a7bd95", "#a788b5"];
