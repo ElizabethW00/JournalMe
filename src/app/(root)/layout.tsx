@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Provider from "@/components/Provider";
 import NavBar from "@/components/NavBar/NavBar";
 import { Toaster } from "react-hot-toast";
+import { Analytics } from "@vercel/analytics/next";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -36,6 +37,7 @@ export default async function RootLayout({
             <Toaster />
             <NavBar />
             {children}
+            <Analytics />
           </body>
         </html>
       </Provider>
